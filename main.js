@@ -1,3 +1,5 @@
+const axios = require('axios');
+let mainEnv = process.env.VUE_APP
 exports.sum =  function (a, b) {
   return a + b;
 }
@@ -68,3 +70,41 @@ exports.actual = function (fn,options,curry) {
     return curry(fn)
   }
 }
+
+exports.detectEnv = ()=>{
+  return {
+    cur:process.env.VUE_APP,
+    mainEnv
+  }
+}
+
+exports.fetchData = () => {
+  console.log('Fetching data...');
+  return axios
+    .get('https://jsonplaceholder.typicode.com/todos/1')
+    .then(response => {
+      return response.data;
+    });
+};
+
+const API_ROOT = "http://jsonplaceholder.typicode.com";
+class API {
+  getPosts() {
+    return new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest();
+      xhr.open("GET", `${API_ROOT}/posts`);
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+          const resp = JSON.parse(xhr.responseText);
+          if (resp.error) {
+            reject(resp.error);
+          } else {
+            resolve(resp);
+          }
+        }
+      };
+      xhr.send();
+    });
+  }
+}
+exports.$http = new API()

@@ -15,6 +15,7 @@ describe('mock function',()=>{
       isCurry:true
     }
     const mockCurry = jest.fn()
+    // 改变函数实现
     mockCurry.mockImplementation(()=>{
         return (a)=>{
           return (b)=> a+b
