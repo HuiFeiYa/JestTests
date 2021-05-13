@@ -6,9 +6,9 @@ exports.sum =  function (a, b) {
 
 
 exports.timerGame =  function (callback) {
-  console.log('Ready....go!');
+  //console.log('Ready....go!');
   const result = () => {
-    console.log("Time's up -- stop!");
+    //console.log("Time's up -- stop!");
     callback && callback();
   }
   setTimeout(result, 1000);
@@ -108,3 +108,12 @@ class API {
   }
 }
 exports.$http = new API()
+
+exports.asyncHandle = (callback)=>{
+  return new Promise((res,rej)=>{
+    setTimeout(() => { // 模拟异步
+      callback && callback('suc')
+      res('suc')
+    }, 1000);
+  })
+}

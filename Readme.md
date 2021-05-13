@@ -94,4 +94,6 @@ describe('mock function',()=>{
 ```
 
 ## mock 模块
-查看 `wxb-manager/utils.test.js` 测试 commonUploadPictureOrFile 方法，依赖了很多其他配置，而我们关心它的依赖配置，只考虑函数的输入会导致不同的输出。
+查看 `wxb-manager/utils.test.js` 测试 commonUploadPictureOrFile 方法，依赖了很多其他配置，而我们关心它的依赖配置，只考虑函数的输入会导致不同的输出。  
+
+创建 \_\_mocks\_\_ 文件夹，放置手动模拟的模块。搜索优先级会比 node_modules 高
