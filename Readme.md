@@ -1,3 +1,4 @@
+# 基本介绍
 ## 钩子函数
 * [作用域及不同作用域下的钩子执行顺序](https://jestjs.io/zh-Hans/docs/setup-teardown)
 * describe 和 test 块的执行顺序。先将 describe 层的代码执行完，然后执行 test
@@ -97,3 +98,24 @@ describe('mock function',()=>{
 查看 `wxb-manager/utils.test.js` 测试 commonUploadPictureOrFile 方法，依赖了很多其他配置，而我们关心它的依赖配置，只考虑函数的输入会导致不同的输出。  
 
 创建 \_\_mocks\_\_ 文件夹，放置手动模拟的模块。搜索优先级会比 node_modules 高
+
+# 工程化
+
+## babel 配置
+使用 babel 可以使用更多高级功能    
+如果在已有项目中，需要兼容之前的 babel 的配置，`jest will set process.env.NODE_ENV to 'test'`可以通过判断环境来兼容 jest 所需的 babel 配置和项目的 babel 配置。 
+```js
+// babel.config.js
+module.exports = api => {
+  const isTest = api.env('test');
+  const jestConfig = { /* ... */}
+  const projectConfig = { /* ... */}
+  return isTest ? jestConfig : projectConfig 
+};
+```
+## jest 配置文件
+1. `jest --init`
+
+## jest CLI
+1. `jest --watch` 监听文件改动
+2. `jest -o async.test.js example.test.js` 仅运行指定模版

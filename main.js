@@ -117,3 +117,35 @@ exports.asyncHandle = (callback)=>{
     }, 1000);
   })
 }
+class User {
+
+  constructor() {
+    this.userInfo = {
+      isAdmin:false,
+      expired:false
+    }
+  }
+  async getInfo() {
+    return axios.post('https://wxb-manger/userinfo').then(response =>{
+      this.userInfo = response.data.userInfo
+    })
+  }
+  get isAdmin() {
+    return this.userInfo.isAdmin 
+  }
+  get expired() {
+    return this.userInfo.expired
+  }
+  get message() {
+    if(this.isAdmin){
+      if(this.expired){
+        return '请再续费'
+      }else{
+        return 'vip'
+      }
+    }else{
+      return '欢迎氪金'
+    }
+  }
+}
+exports.user = new User()
